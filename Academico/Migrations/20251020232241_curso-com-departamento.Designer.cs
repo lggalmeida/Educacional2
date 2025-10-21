@@ -3,6 +3,7 @@ using Academico.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academico.Migrations
 {
     [DbContext(typeof(EducacionalContext))]
-    partial class EducacionalContextModelSnapshot : ModelSnapshot
+    [Migration("20251020232241_curso-com-departamento")]
+    partial class cursocomdepartamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,26 +131,6 @@ namespace Academico.Migrations
                     b.ToTable("Departamentos");
                 });
 
-            modelBuilder.Entity("Academico.Models.Disciplina", b =>
-                {
-                    b.Property<int>("DisciplinaID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("DisciplinaID"));
-
-                    b.Property<int>("CargaHoraria")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("DisciplinaID");
-
-                    b.ToTable("Disciplinas");
-                });
-
             modelBuilder.Entity("Academico.Models.Instituicao", b =>
                 {
                     b.Property<long>("InstituicaoID")
@@ -167,21 +150,6 @@ namespace Academico.Migrations
                     b.HasKey("InstituicaoID");
 
                     b.ToTable("Instituicoes");
-                });
-
-            modelBuilder.Entity("CursoDisciplina", b =>
-                {
-                    b.Property<int>("CursosCursoID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("DisciplinasDisciplinaID")
-                        .HasColumnType("int");
-
-                    b.HasKey("CursosCursoID", "DisciplinasDisciplinaID");
-
-                    b.HasIndex("DisciplinasDisciplinaID");
-
-                    b.ToTable("CursoDisciplina");
                 });
 
             modelBuilder.Entity("Academico.Models.AlunoAvaliacao", b =>
@@ -223,21 +191,6 @@ namespace Academico.Migrations
                         .IsRequired();
 
                     b.Navigation("Instituicao");
-                });
-
-            modelBuilder.Entity("CursoDisciplina", b =>
-                {
-                    b.HasOne("Academico.Models.Curso", null)
-                        .WithMany()
-                        .HasForeignKey("CursosCursoID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Academico.Models.Disciplina", null)
-                        .WithMany()
-                        .HasForeignKey("DisciplinasDisciplinaID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Academico.Models.Aluno", b =>

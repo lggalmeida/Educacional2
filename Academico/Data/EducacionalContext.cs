@@ -14,6 +14,8 @@ namespace Academico.Data
         public DbSet<Aluno> Alunos { get; set; }
         public DbSet<Avaliacao> Avaliacoes { get; set; }
         public DbSet<AlunoAvaliacao> AlunosAvaliacoes { get; set; }
+        public DbSet<Curso> Cursos { get; set; }
+        public DbSet<Disciplina> Disciplinas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
